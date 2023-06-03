@@ -35,7 +35,7 @@ def arrangeCoins(n: int) -> int:
 ## Maths
 # For x filled steps, we will have total x(x+1)/2 coins as coins are in AP with 1 as CD
 # for completly filled steps, we need to find x for which x(x+1)/2 = n
-# Solving for x we get (sqrt(1-8*n)-1)/2
+# Solving for x we get (sqrt(1+8*n)-1)/2
     import math
     return int(math.sqrt(1+8*n)-1)//2
 
