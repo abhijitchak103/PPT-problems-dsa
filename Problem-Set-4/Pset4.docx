@@ -1,0 +1,111 @@
+1. def threeArrayIntersection(arr1: list[int], arr2: list[int], arr3: list[int]) -> list[int]:
+    res = []
+    i, j, k = 0,0,0
+    p, q, r = len(arr1), len(arr2), len(arr3)
+    while i < p and j < q and k < r:
+        if arr1[i] == arr2[j] == arr3[k]:
+            res.append(arr1[i])
+            i += 1
+            j += 1
+            k += 1
+            continue
+
+        next_num_possible = max(arr1[i], arr2[j], arr3[k])
+
+        if arr1[i] < next_num_possible:
+            i += 1
+        if arr2[j] < next_num_possible:
+            j += 1
+        if arr3[k] < next_num_possible:
+            k += 1
+    return res 
+
+2. def findDifference(nums1: list[int], nums2: list[int]) -> list[list[int]]:
+
+    nums1 = list(set(nums1))
+    # Doing this to make sure the lists are sorted.
+    nums1.sort()
+    nums2 = list(set(nums2))
+    # Doing this to make sure the lists are sorted.
+    nums2.sort()
+    i, j = 0, 0
+    p, q = len(nums1), len(nums2)
+    nums1_arr = []
+    nums2_arr = []
+    while i < p and j < q:
+        if nums1[i] == nums2[j]:
+            i += 1
+            j += 1
+        elif nums1[i] < nums2[j]:
+            nums1_arr.append(nums1[i])
+            i += 1
+        elif nums1[i] > nums2[j]:
+            j += 1
+
+    if i <= p-1:
+        nums1_arr.extend(nums1[i:])
+
+    i, j = 0, 0
+    while i < p and j < q:
+        if nums1[i] == nums2[j]:
+            i += 1
+            j += 1
+        elif nums2[j] < nums1[i]:
+            nums2_arr.append(nums2[j])
+            j += 1
+        elif nums2[j] > nums1[i]:
+            i += 1
+    
+    if j <= q-1:
+        nums2_arr.extend(nums2[j:])
+    
+    res = [nums1_arr, nums2_arr]
+
+    return res
+
+3. def transposeMatrix(matrix: list[list[int]]) -> list[list[int]]:
+    rows = len(matrix)
+    columns = len(matrix[0])
+
+    transpose = [[i+j for j in range(rows)] for i in range(columns)]
+
+    for i in range(columns):
+        for j in range(rows):
+            transpose[i][j] = matrix[j][i]
+
+    return transpose
+
+4. def arrayPairSum(nums: list[int]) -> int:
+    nums.sort()
+    sum = 0
+    for i in range(0, len(nums)-1, 2):
+        sum += nums[i]
+    
+    return sum
+
+5. def arrangeCoins(n: int) -> int:
+
+# For x filled steps, we will have total x(x+1)/2 coins as coins are in AP with 1 as CD
+# for completly filled steps, we need to find x for which x(x+1)/2 = n
+# Solving for x we get (sqrt(1+8*n)-1)/2
+    import math
+    return int(math.sqrt(1+8*n)-1)//2
+
+6. def sortedSquares(nums: list[int]) -> list[int]:
+    return sorted(x**2 for x in nums)
+
+7. def maxCount(m: int, n: int, ops: list[list[int]]) -> int:    
+    for pair in ops:
+        m = min(m, pair[0])
+        n = min(m, pair[0])
+    return m*n
+
+8. def shuffle(nums: list[int], n: int) -> list[int]:
+    i = 0
+    ans = []
+    while i < n:
+        ans.append(nums[i])
+        ans.append(nums[i+n])
+        i += 1
+
+    return ans
